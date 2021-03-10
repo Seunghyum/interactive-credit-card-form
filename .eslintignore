@@ -1,0 +1,10 @@
+docs/
+node_modules/
+public/
+bin/
+build/
+coverage/
+webpack.config.**.js
+**.spec.**
+package.json
+yarn.lock
