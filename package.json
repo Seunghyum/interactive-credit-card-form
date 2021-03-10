@@ -9,7 +9,8 @@
     "lint": "tslint .",
     "lint:fix": "tslint . --fix",
     "format": "pretty-quick --staged --ignore-path=.prettierignore",
-    "build": "webpack --config ./build/webpack.config.prod.js"
+    "build": "webpack --config ./build/webpack.config.prod.js",
+    "prepare": "husky install"
   },
   "dependencies": {
     "react": "^17.0.1",
@@ -43,6 +44,7 @@
     "postcss": "^8.2.8",
     "postcss-loader": "^5.1.0",
     "prettier": "^2.2.1",
+    "pretty-quick": "^3.1.0",
     "sass-loader": "^11.0.1",
     "style-loader": "^2.0.0",
     "ts-loader": "^8.0.17",
