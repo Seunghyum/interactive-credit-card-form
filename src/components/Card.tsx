@@ -2,6 +2,8 @@ import React, { useMemo, useState } from 'react';
 import cardDefaultBackgroundImg from '~src/assets/images/card-default-background.jpg';
 import VISA_IMG from '~src/assets/images/visa.png';
 import CHIP_IMG from '~src/assets/images/chip.png';
+
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import classNames from 'classnames';
 
 interface iProps {
@@ -24,7 +26,6 @@ const Card: React.FC<iProps> = ({
   isCardFlipped = false,
 }) => {
   const [isBack, setIsBack] = useState(false);
-
   const [cardType, setCardType] = useState(null);
 
   const filterMonth = useMemo(() => {
@@ -32,7 +33,32 @@ const Card: React.FC<iProps> = ({
     return str.length === 1 ? `0${str}` : str;
   }, [mm]);
 
-  const RenderCVV = [...cvv].map((_, i) => <span key={i}>*</span>);
+  const RenderCVV = useMemo(() => [...cvv].map((_, i) => <span key={i}>*</span>), [cvv]);
+  const RenderCardNumber = useMemo(
+    () =>
+      [...cardNumber].map((str, index) => (
+        <span key={index}>
+          <TransitionGroup className="slide-fade-up">
+            <CSSTransition
+              timeout={250}
+              key={String(cardNumber[index])}
+              classNames={{
+                enter: 'slide-fade-up-enter',
+                enterActive: 'slide-fade-up-enter-active',
+                exit: 'slide-fade-up-exit',
+                exitActive: 'slide-fade-up-exit-active',
+              }}
+            >
+              <div className={classNames({ 'card-item__numberItem': true, active: str === ' ' })}>
+                {cardNumber[index]}
+              </div>
+            </CSSTransition>
+          </TransitionGroup>
+          {/* <div className={classNames({ 'card-item__numberItem': true, active: str === ' ' })}>{cardNumber[index]}</div> */}
+        </span>
+      )),
+    [cardNumber],
+  );
 
   return (
     <div className={classNames({ 'card-item': true, active: isCardFlipped })}>
@@ -47,15 +73,7 @@ const Card: React.FC<iProps> = ({
               {cardType && <img src={cardDefaultBackgroundImg} alt="card type" className="card-item__typeImg" />}
             </div>
           </div>
-          <label className="card-item__number">
-            {[...cardNumber].map((str, index) => (
-              <span key={index}>
-                <div className={classNames({ 'card-item__numberItem': true, active: str === ' ' })}>
-                  {cardNumber[index]}
-                </div>
-              </span>
-            ))}
-          </label>
+          <label className="card-item__number">{RenderCardNumber}</label>
           <div className="card-item__content">
             <label className="card-item__info">
               <div className="card-item__holder">Card Holder</div>
