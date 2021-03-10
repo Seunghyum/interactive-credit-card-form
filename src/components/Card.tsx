@@ -32,7 +32,16 @@ const Card: React.FC<iProps> = ({
     return str.length === 1 ? `0${str}` : str;
   }, [mm]);
 
-  const RenderCVV = [...cvv].map((_, i) => <span key={i}>*</span>);
+  const RenderCVV = useMemo(() => [...cvv].map((_, i) => <span key={i}>*</span>), [cvv]);
+  const RenderCardNumber = useMemo(
+    () =>
+      [...cardNumber].map((str, index) => (
+        <span key={index}>
+          <div className={classNames({ 'card-item__numberItem': true, active: str === ' ' })}>{cardNumber[index]}</div>
+        </span>
+      )),
+    [cardNumber],
+  );
 
   return (
     <div className={classNames({ 'card-item': true, active: isCardFlipped })}>
@@ -47,15 +56,7 @@ const Card: React.FC<iProps> = ({
               {cardType && <img src={cardDefaultBackgroundImg} alt="card type" className="card-item__typeImg" />}
             </div>
           </div>
-          <label className="card-item__number">
-            {[...cardNumber].map((str, index) => (
-              <span key={index}>
-                <div className={classNames({ 'card-item__numberItem': true, active: str === ' ' })}>
-                  {cardNumber[index]}
-                </div>
-              </span>
-            ))}
-          </label>
+          <label className="card-item__number">{RenderCardNumber}</label>
           <div className="card-item__content">
             <label className="card-item__info">
               <div className="card-item__holder">Card Holder</div>
