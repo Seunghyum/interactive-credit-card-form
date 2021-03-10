@@ -1,17 +1,16 @@
-@import url("https://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600,700|Source+Sans+Pro:400,600,700&display=swap");
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
+@import 'normalize.css';
 
-body {
-  background: #ddeefc;
-  font-family: "Source Sans Pro", sans-serif;
+* { 
+  font-family: 'Spoqa Han Sans Neo', 'sans-serif'; 
   font-size: 16px;
-}
-* {
   box-sizing: border-box;
   &:focus {
     outline: none;
   }
 }
 .wrapper {
+  background-color: #ddeefe;
   min-height: 100vh;
   display: flex;
   padding: 50px 15px;
@@ -137,13 +136,13 @@ body {
     height: 180px;
   }
 
-  &.-active {
+  &.active {
     .card-item__side {
-      &.-front {
+      &.front {
         transform: perspective(1000px) rotateY(180deg) rotateX(0deg)
           rotateZ(0deg);
       }
-      &.-back {
+      &.back {
         transform: perspective(1000px) rotateY(0) rotateX(0deg) rotateZ(0deg);
         // box-shadow: 0 20px 50px 0 rgba(81, 88, 206, 0.65);
       }
@@ -177,7 +176,7 @@ body {
       opacity: 0.5;
     }
 
-    &.-active {
+    &.active {
       opacity: 1;
     }
   }
@@ -193,7 +192,7 @@ body {
     backface-visibility: hidden;
     height: 100%;
 
-    &.-back {
+    &.back {
       position: absolute;
       top: 0;
       left: 0;
@@ -312,7 +311,7 @@ body {
 
   &__holder {
     opacity: 0.7;
-    font-size: 13px;
+    font-size: 14px;
     margin-bottom: 6px;
     @media screen and (max-width: 480px) {
       font-size: 12px;
@@ -377,14 +376,15 @@ body {
   &__numberItem {
     width: 16px;
     display: inline-block;
-    &.-active {
+    font-size: 1.5rem;
+    &.active {
       width: 30px;
     }
 
     @media screen and (max-width: 480px) {
       width: 13px;
 
-      &.-active {
+      &.active {
         width: 16px;
       }
     }
@@ -392,7 +392,7 @@ body {
     @media screen and (max-width: 360px) {
       width: 12px;
 
-      &.-active {
+      &.active {
         width: 8px;
       }
     }
@@ -406,11 +406,11 @@ body {
 
   &__date {
     flex-wrap: wrap;
-    font-size: 18px;
+    font-size: 16px;
     margin-left: auto;
     padding: 10px;
     display: inline-flex;
-    width: 80px;
+    width: 90px;
     white-space: nowrap;
     flex-shrink: 0;
     cursor: pointer;
@@ -428,9 +428,13 @@ body {
     }
   }
 
+  &__divider {
+    padding: 0px 4px 0px 8px;
+  }
+
   &__dateTitle {
     opacity: 0.7;
-    font-size: 13px;
+    font-size: 14px;
     padding-bottom: 6px;
     width: 100%;
 
@@ -599,12 +603,12 @@ body {
       transition: all .3s ease-in-out;
     }
 
-    &:hover:not(:disabled), &.-active:not(:disabled) {
+    &:hover:not(:disabled), &.active:not(:disabled) {
       color: #2364d2;
       opacity: 1;
     }
 
-    &.-active {
+    &.active {
       &::before, &::after {
         transform: scale(1);
         opacity: 1;
@@ -618,12 +622,12 @@ body {
   }
 }
 
-.slide-fade-up-enter-active {
+.slide-fade-up-enter.active {
   transition: all 0.25s ease-in-out;
   transition-delay: 0.1s;
   position: relative;
 }
-.slide-fade-up-leave-active {
+.slide-fade-up-leave.active {
   transition: all 0.25s ease-in-out;
   position: absolute;
 }
@@ -638,12 +642,12 @@ body {
   pointer-events: none;
 }
 
-.slide-fade-right-enter-active {
+.slide-fade-right-enter.active {
   transition: all 0.25s ease-in-out;
   transition-delay: 0.1s;
   position: relative;
 }
-.slide-fade-right-leave-active {
+.slide-fade-right-leave.active {
   transition: all 0.25s ease-in-out;
   position: absolute;
 }

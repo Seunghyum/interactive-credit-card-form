@@ -4,6 +4,7 @@ public/
 bin/
 build/
 coverage/
+src/assets/
 package.json
 yarn.lock
 .gitignore
