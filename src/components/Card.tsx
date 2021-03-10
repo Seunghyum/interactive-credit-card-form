@@ -2,6 +2,8 @@ import React, { useMemo, useState } from 'react';
 import cardDefaultBackgroundImg from '~src/assets/images/card-default-background.jpg';
 import VISA_IMG from '~src/assets/images/visa.png';
 import CHIP_IMG from '~src/assets/images/chip.png';
+
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import classNames from 'classnames';
 
 interface iProps {
@@ -24,7 +26,6 @@ const Card: React.FC<iProps> = ({
   isCardFlipped = false,
 }) => {
   const [isBack, setIsBack] = useState(false);
-
   const [cardType, setCardType] = useState(null);
 
   const filterMonth = useMemo(() => {
@@ -37,7 +38,23 @@ const Card: React.FC<iProps> = ({
     () =>
       [...cardNumber].map((str, index) => (
         <span key={index}>
-          <div className={classNames({ 'card-item__numberItem': true, active: str === ' ' })}>{cardNumber[index]}</div>
+          <TransitionGroup className="slide-fade-up">
+            <CSSTransition
+              timeout={250}
+              key={String(cardNumber[index])}
+              classNames={{
+                enter: 'slide-fade-up-enter',
+                enterActive: 'slide-fade-up-enter-active',
+                exit: 'slide-fade-up-exit',
+                exitActive: 'slide-fade-up-exit-active',
+              }}
+            >
+              <div className={classNames({ 'card-item__numberItem': true, active: str === ' ' })}>
+                {cardNumber[index]}
+              </div>
+            </CSSTransition>
+          </TransitionGroup>
+          {/* <div className={classNames({ 'card-item__numberItem': true, active: str === ' ' })}>{cardNumber[index]}</div> */}
         </span>
       )),
     [cardNumber],
