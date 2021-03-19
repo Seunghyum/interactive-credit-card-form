@@ -23,5 +23,5 @@ const Select: React.FC<iProps> = ({ options = [], placeholder = '', defaultValue
     </select>
   );
 };
-
 export default Select;
+export const MemorizedSelect = React.memo(Select);
