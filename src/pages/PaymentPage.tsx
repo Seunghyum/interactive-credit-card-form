@@ -1,7 +1,7 @@
-import React, { ChangeEvent, useCallback, useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import Card from '~components/Card';
-import Input from '~components/Input';
-import Select from '~components/Select';
+import { MemorizedInput } from '~components/Input';
+import { MemorizedSelect } from '~components/Select';
 
 import useCardNumber from '~src/hooks/useCardNumber';
 
@@ -16,29 +16,29 @@ const PaymentPage: React.FC = () => {
   const [cvv, setCvv] = useState<string>('');
   const [isCardFlipped, setIsCardFlipped] = useState(false);
 
-  const handleCardNumber = useCallback((event: ChangeEvent<HTMLInputElement>) => {
+  const handleCardNumber = (event: ChangeEvent<HTMLInputElement>) => {
     updateCardNumber(event.target.value);
-  }, []);
+  };
 
-  const handleCardHolder = useCallback((event: ChangeEvent<HTMLInputElement>) => {
+  const handleCardHolder = (event: ChangeEvent<HTMLInputElement>) => {
     setCardHolder(event.target.value);
-  }, []);
+  };
 
-  const handleMonthSelect = useCallback((event: ChangeEvent<HTMLSelectElement>) => {
+  const handleMonthSelect = (event: ChangeEvent<HTMLSelectElement>) => {
     setMonth(Number(event.target.value));
-  }, []);
+  };
 
-  const handleYearSelect = useCallback((event: ChangeEvent<HTMLSelectElement>) => {
+  const handleYearSelect = (event: ChangeEvent<HTMLSelectElement>) => {
     setYear(Number(event.target.value));
-  }, []);
+  };
 
-  const handleCvv = useCallback((event: ChangeEvent<HTMLInputElement>) => {
+  const handleCvv = (event: ChangeEvent<HTMLInputElement>) => {
     setCvv(event.target.value);
-  }, []);
+  };
 
-  const handleCvvFocus = useCallback(() => {
+  const handleCvvFocus = () => {
     setIsCardFlipped((prev) => !prev);
-  }, []);
+  };
 
   const handleSubmit = () => {
     console.log(`
@@ -64,24 +64,24 @@ const PaymentPage: React.FC = () => {
           />
         </div>
         <div className="card-form__inner">
-          <Input
+          <MemorizedInput
             maxLength={DEFAULT_CARD_LENGTH}
             value={cardNumber}
             label="Card Number"
             onChange={handleCardNumber}
             autoComplete="off"
           />
-          <Input value={cardHolder} label="Card Name" onChange={handleCardHolder} autoComplete="off" />
+          <MemorizedInput value={cardHolder} label="Card Name" onChange={handleCardHolder} autoComplete="off" />
           <div className="card-form__row">
             <div className="card-form__col">
               <div className="card-form__group">
                 <label className="card-input__label">Expiration Date</label>
-                <Select onChange={handleMonthSelect} options={MONTH_SELECT_OPTIONS} />
-                <Select onChange={handleYearSelect} options={YEAR_SELECT_OPTIONS} />
+                <MemorizedSelect onChange={handleMonthSelect} options={MONTH_SELECT_OPTIONS} />
+                <MemorizedSelect onChange={handleYearSelect} options={YEAR_SELECT_OPTIONS} />
               </div>
             </div>
             <div className="card-form__col -cvv">
-              <Input
+              <MemorizedInput
                 value={cvv}
                 label="CVV"
                 onFocus={handleCvvFocus}

@@ -48,3 +48,4 @@ const Input: React.FC<iProps> = ({
 };
 
 export default Input;
+export const MemorizedInput = React.memo(Input);
