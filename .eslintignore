@@ -8,3 +8,4 @@ webpack.config.**.js
 **.spec.**
 package.json
 yarn.lock
+*.config.js
