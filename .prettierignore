@@ -2,7 +2,6 @@ docs/
 node_modules/
 public/
 bin/
-build/
 coverage/
 src/assets/
 package.json
